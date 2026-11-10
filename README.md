@@ -1,9 +1,9 @@
 # Development container images
 
-This repository builds two Fedora-based, AMD64-only images:
+Two Fedora-based, AMD64-only images:
 
-- `Dockerfile.devcontainer` provides Rust, .NET 10, Node.js, Clang, protobuf, and common development tools.
-- `Dockerfile.runner` provides an ephemeral GitHub Actions organization runner with nested Podman support for environments using libkrun.
+- a development image with Rust, .NET 10, Node.js, Clang, protobuf, and common development tools, built from `Dockerfile.devcontainer`;
+- an ephemeral GitHub Actions organization runner with nested Podman support for environments using libkrun, built from `Dockerfile.runner`.
 
 Both images are built on pushes and pull requests to `main`. Pushes to `main` and the weekly scheduled build publish the `latest` tags configured in the GitHub Actions workflow.
 
@@ -54,6 +54,6 @@ hadolint Dockerfile.devcontainer
 hadolint Dockerfile.runner
 ```
 
-## License
+## Contributing and license
 
-Licensed under the Apache License 2.0. See [LICENSE](LICENSE).
+See the [contributing guide](https://github.com/voron-software/.github/blob/main/.github/CONTRIBUTING.md). Licensed under the [Apache License 2.0](LICENSE).
