@@ -11,6 +11,11 @@ on:
   schedule:
     - cron: '00 4 * * 0'
 
+# A newer push to the same pull request makes this run stale.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   lint:
     name: Lint
@@ -41,6 +46,8 @@ jobs:
 
   devcontainer:
     name: Devcontainer
+    # Neither image is built, let alone published, while a linter is red.
+    needs: lint
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -68,6 +75,7 @@ jobs:
 
   runner:
     name: Runner
+    needs: lint
     runs-on: ubuntu-latest
     permissions:
       contents: read
